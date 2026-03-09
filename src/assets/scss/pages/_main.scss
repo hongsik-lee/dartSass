@@ -1,0 +1,317 @@
+// 메인 페이지 스타일
+@use '../base' as base;
+@use '../base/variables' as vars;
+@use '../base/mixins' as mix;
+@use '../components/button' as compbtn;
+@use '../components/card' as compcard;
+
+/* 히어로 섹션 */
+.hero {
+  background: linear-gradient(135deg, base.$primary 0%, base.$accent 100%);
+  color: base.$white;
+  padding: base.$space-3xl base.$space-lg;
+  text-align: center;
+  margin-bottom: base.$space-3xl;
+
+  @include mix.media(md) {
+    padding: base.$space-2xl base.$space-md;
+    margin-bottom: base.$space-2xl;
+  }
+
+  @include mix.media(sm) {
+    padding: base.$space-lg base.$space-md;
+    margin-bottom: base.$space-lg;
+  }
+}
+
+.hero h1 {
+  @include mix.heading(48px, bold);
+  margin-bottom: 20px;
+
+  @include mix.media(md) {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+
+  @include mix.media(sm) {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+}
+
+.hero p {
+  @include mix.font(vars.$font-family-base, 20px, vars.$font-weight-normal, vars.$line-height-normal);
+  margin-bottom: 30px;
+  opacity: 0.95;
+
+  @include mix.media(md) {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  @include mix.media(sm) {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+}
+
+/* CTA 버튼 */
+.cta-buttons {
+  @include mix.flex-center;
+  gap: base.$space-md;
+  flex-wrap: wrap;
+  margin-top: base.$space-lg;
+
+  @include mix.media(sm) {
+    gap: base.$space-sm;
+    margin-top: base.$space-md;
+  }
+
+  a {
+    @include compbtn.btn-base;
+    padding: base.$space-md base.$space-2xl;
+    @include mix.rounded(base.$radius-md);
+    font-size: base.$font-size-base;
+    font-weight: base.$font-weight-semibold;
+    @include mix.transition;
+    display: inline-block;
+
+    @include mix.media(sm) {
+      padding: base.$space-sm base.$space-lg;
+      font-size: base.$font-size-sm;
+    }
+  }
+  .btn {
+    &-primary {
+      background: base.$primary;
+      color: base.$white;
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+    }
+    &-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid white;
+      &:hover {
+        background: white;
+        color: base.$primary;
+      }
+    }
+    &-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      &:hover {
+        background: white;
+        color: base.$primary;
+      }
+    }
+  }
+} 
+
+
+/* 기능 그리드 */
+.features {
+  @include mix.grid-auto(280px, base.$space-lg);
+  margin-bottom: 60px;
+
+  @include mix.media(md) {
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: base.$space-2xl;
+  }
+
+  @include mix.media(sm) {
+    grid-template-columns: 1fr;
+    gap: base.$space-md;
+    margin-bottom: base.$space-lg;
+  }
+}
+
+.feature-card {
+  @include compcard.card-base;
+  @include mix.transition;
+
+  &:hover {
+    transform: translateY(-8px);
+    @include mix.shadow(lg);
+  }
+}
+
+.feature-card h3 {
+  color: base.$primary;
+  @include mix.heading(20px, bold);
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* 섹션 제목 */
+.section-title {
+  @include mix.heading(base.$font-size-4xl, bold);
+  color: base.$text;
+  margin-bottom: base.$space-sm;
+  text-align: center;
+
+  @include mix.media(md) {
+    font-size: base.$font-size-2xl;
+  }
+
+  @include mix.media(sm) {
+    font-size: base.$font-size-xl;
+  }
+}
+
+.section-subtitle {
+  text-align: center;
+  color: base.$text-secondary;
+  @include mix.font(vars.$font-family-base, base.$font-size-sm, vars.$font-weight-normal, vars.$line-height-normal);
+  margin-bottom: base.$space-2xl;
+
+  @include mix.media(sm) {
+    font-size: base.$font-size-xs;
+    margin-bottom: base.$space-lg;
+  }
+}
+
+/* ========== 모달 스타일 ========== */
+
+/* 모달 컨테이너 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: base.$z-modal;
+
+  &.active {
+    display: flex;
+  }
+}
+
+/* 모달 오버레이 */
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  @include mix.transition;
+}
+
+/* 모달 컨텐츠 */
+.modal-content {
+  position: relative;
+  background: base.$white;
+  border-radius: base.$radius-lg;
+  max-width: 700px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: base.$space-3xl;
+  @include mix.shadow(2xl);
+  z-index: calc(base.$z-modal + 1);
+
+  @include mix.media(md) {
+    max-width: 600px;
+    padding: base.$space-2xl;
+  }
+
+  @include mix.media(sm) {
+    padding: base.$space-lg;
+    max-height: 90vh;
+    width: 95%;
+    border-radius: base.$radius-md;
+  }
+}
+
+/* 모달 닫기 버튼 */
+.modal-close {
+  position: absolute;
+  top: base.$space-lg;
+  right: base.$space-lg;
+  width: 36px;
+  height: 36px;
+  background: base.$gray-100;
+  border: none;
+  border-radius: base.$radius-md;
+  font-size: 24px;
+  color: base.$text;
+  cursor: pointer;
+  @include mix.flex-center;
+  @include mix.transition;
+
+  &:hover {
+    background: base.$gray-200;
+    transform: rotate(90deg);
+  }
+}
+
+/* 모달 기능 설명 */
+.modal-feature {
+  @include mix.flex-column(base.$space-xl);
+}
+
+/* 모달 제목 */
+.modal-title {
+  @include mix.heading(28px, vars.$font-weight-bold);
+  color: base.$primary;
+  margin: 0;
+  padding-bottom: base.$space-md;
+  border-bottom: 2px solid base.$primary;
+}
+
+/* 모달 설명 */
+.modal-description {
+  @include mix.font(vars.$font-family-base, 16px, vars.$font-weight-normal, vars.$line-height-normal);
+  color: base.$text-secondary;
+  margin: 0;
+}
+
+/* 모달 코드 섹션 */
+.modal-code-section {
+  @include mix.flex-column(base.$space-md);
+}
+
+/* 모달 코드 제목 */
+.modal-code-title {
+  @include mix.heading(18px, vars.$font-weight-semibold);
+  color: base.$text;
+  margin: 0;
+}
+
+/* 모달 코드 블록 */
+.modal-code {
+  background: base.$gray-50;
+  border: 1px solid base.$border-color;
+  border-radius: base.$radius-md;
+  padding: base.$space-lg;
+  overflow-x: auto;
+  margin: 0;
+  font-family: vars.$font-family-mono;
+  font-size: 13px;
+  line-height: 1.6;
+  color: base.$text;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+
+  code {
+    color: base.$text;
+  }
+}
+
+/* Feature Card 커서 포인터 */
+.feature-card {
+  cursor: pointer;
+}

@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>컴포넌트 갤러리</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header class="header">
+    <h2 class="header-title">Dart Sass Project</h2>
+    <a href="login.html" class="btn-login">로그인</a>
+  </header>
+
+  <main class="container">
+    <!-- 탭 컨테이너 -->
+    <div class="tab-container">
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="switchTab(event, 'boards')">📋 게시판</button>
+        <button class="tab-button" onclick="switchTab(event, 'buttons')">🔘 버튼</button>
+        <button class="tab-button" onclick="switchTab(event, 'typography')">📝 타이포그래피</button>
+        <button class="tab-button" onclick="switchTab(event, 'cards')">🎨 카드</button>
+        <button class="tab-button" onclick="switchTab(event, 'forms')">📝 폼</button>
+        <button class="tab-button" onclick="switchTab(event, 'tokens')">🎭 색상 팔레트</button>
+      </div>
+
+      <!-- 게시판 탭 -->
+      <div id="boards" class="tab-content active">
+        <div class="card">
+          <h2>📋 게시판 컴포넌트</h2>
+          <p>다양한 게시판 유형의 샘플입니다.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="sub-title">공지사항</h3>
+          <ul class="board-list">
+            <li class="board-item">
+              <div class="board-num">1</div>
+              <div class="board-content">
+                <p class="board-title"><a href="#">[중요] 서비스 점검 예정 안내</a></p>
+                <p class="board-meta">2026-03-10 · 조회 1,234회</p>
+              </div>
+            </li>
+            <li class="board-item">
+              <div class="board-num">2</div>
+              <div class="board-content">
+                <p class="board-title"><a href="#">새 기능 추가: 다크 모드 지원</a></p>
+                <p class="board-meta">2026-03-09 · 조회 892회</p>
+              </div>
+            </li>
+            <li class="board-item">
+              <div class="board-num">3</div>
+              <div class="board-content">
+                <p class="board-title"><a href="#">Dart Sass 마이그레이션 완료</a></p>
+                <p class="board-meta">2026-03-08 · 조회 654회</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="sub-title">자유게시판</h3>
+          <ul class="board-list">
+            <li class="board-item">
+              <div class="board-num">15</div>
+              <div class="board-content">
+                <p class="board-title"><a href="#">오늘의 개발 회고: 300페이지 프로젝트 시작</a></p>
+                <p class="board-meta">김철수 · 2026-03-04 · 댓글 12개</p>
+              </div>
+            </li>
+            <li class="board-item">
+              <div class="board-num">14</div>
+              <div class="board-content">
+                <p class="board-title"><a href="#">재미있는 CSS Tricks 모음</a></p>
+                <p class="board-meta">이영희 · 2026-03-03 · 댓글 8개</p>
+              </div>
+            </li>
+            <li class="board-item">
+              <div class="board-num">13</div>
+              <div class="board-content">
+                <p class="board-title"><a href="#">Gulp 자동화: 효율적인 빌드 도구</a></p>
+                <p class="board-meta">박민수 · 2026-03-01 · 댓글 5개</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 버튼 탭 -->
+      <div id="buttons" class="tab-content">
+        <div class="card">
+          <h2>🔘 버튼 컴포넌트</h2>
+          <p>다양한 스타일과 크기의 버튼들입니다.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="sub-title">기본 버튼</h3>
+          <div class="button-demo">
+            <button class="btn btn-primary">주요 버튼</button>
+            <button class="btn btn-secondary">성공 버튼</button>
+            <button class="btn btn-accent">강조 버튼</button>
+            <button class="btn btn-outline">테두리 버튼</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="sub-title">크기별 버튼</h3>
+          <div class="button-demo">
+            <button class="btn btn-sm btn-primary">소형</button>
+            <button class="btn btn-primary">기본</button>
+            <button class="btn btn-lg btn-primary">대형</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="sub-title">상태별 버튼</h3>
+          <div class="button-demo">
+            <button class="btn btn-primary">활성</button>
+            <button class="btn btn-primary" disabled>비활성 (disabled)</button>
+            <button class="btn btn-disabled">비활성 스타일</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="sub-title">다양한 조합</h3>
+          <div class="button-demo">
+            <button class="btn btn-primary btn-sm">저장 (소)</button>
+            <button class="btn btn-secondary btn-sm">취소 (소)</button>
+            <button class="btn btn-primary btn-lg">확인</button>
+            <button class="btn btn-outline btn-lg">더보기</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 타이포그래피 탭 -->
+      <div id="typography" class="tab-content">
+        <div class="card">
+          <h2>📝 타이포그래피</h2>
+          <p>프로젝트에서 사용되는 모든 텍스트 크기와 스타일입니다.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="sub-title">제목 (Heading)</h3>
+          <div class="typography-grid">
+            <div class="typography-item">
+              <h1>Heading 1</h1>
+              <div class="label">font-size: 48px | font-weight: bold</div>
+            </div>
+            <div class="typography-item">
+              <h2>Heading 2</h2>
+              <div class="label">font-size: 36px | font-weight: bold</div>
+            </div>
+            <div class="typography-item">
+              <h3>Heading 3</h3>
+              <div class="label">font-size: 28px | font-weight: bold</div>
+            </div>
+            <div class="typography-item">
+              <h4>Heading 4</h4>
+              <div class="label">font-size: 24px | font-weight: bold</div>
+            </div>
+            <div class="typography-item">
+              <h5>Heading 5</h5>
+              <div class="label">font-size: 20px | font-weight: bold</div>
+            </div>
+            <div class="typography-item">
+              <h6>Heading 6</h6>
+              <div class="label">font-size: 18px | font-weight: bold</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="sub-title">본문 텍스트</h3>
+          <div class="typography-grid">
+            <div class="typography-item">
+              <p style="font-size: 18px;">Extra Large (18px)</p>
+              <p>한국어 텍스트 예제입니다.</p>
+              <div class="label">$font-size-lg</div>
+            </div>
+            <div class="typography-item">
+              <p style="font-size: 16px;">Large (16px) - 기본</p>
+              <p>한국어 텍스트 예제입니다.</p>
+              <div class="label">$font-size-base</div>
+            </div>
+            <div class="typography-item">
+              <p style="font-size: 14px;">Small (14px)</p>
+              <p>한국어 텍스트 예제입니다.</p>
+              <div class="label">$font-size-sm</div>
+            </div>
+            <div class="typography-item">
+              <p style="font-size: 12px;">Extra Small (12px)</p>
+              <p>한국어 텍스트 예제입니다.</p>
+              <div class="label">$font-size-xs</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="sub-title">줄 높이 (Line Height)</h3>
+          <div class="typography-item" style="margin-bottom: 16px;">
+            <p style="line-height: 1.2; margin: 0;">Tight (1.2): Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+            <div class="label">$line-height-tight</div>
+          </div>
+          <div class="typography-item" style="margin-bottom: 16px;">
+            <p style="line-height: 1.5; margin: 0;">Normal (1.5): Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+            <div class="label">$line-height-normal</div>
+          </div>
+          <div class="typography-item">
+            <p style="line-height: 1.75; margin: 0;">Relaxed (1.75): Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+            <div class="label">$line-height-relaxed</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 카드 탭 -->
+      <div id="cards" class="tab-content">
+        <div class="card">
+          <h2>🎨 카드 컴포넌트</h2>
+          <p>콘텐츠를 감싸는 카드 컴포넌트의 다양한 변형입니다.</p>
+        </div>
+
+        <div class="card-grid">
+          <div class="card-sample">
+            <div class="card-sample-image">카드 1</div>
+            <div class="card-sample-body">
+              <h4>기본 카드</h4>
+              <p>호버 시 위로 올라가는 효과가 있는 기본 카드 컴포넌트입니다.</p>
+            </div>
+          </div>
+
+          <div class="card-sample">
+            <div class="card-sample-image" style="background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);">카드 2</div>
+            <div class="card-sample-body">
+              <h4>성공 카드</h4>
+              <p>초록색 그라데이션을 사용한 성공 상태의 카드입니다.</p>
+            </div>
+          </div>
+
+          <div class="card-sample">
+            <div class="card-sample-image" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">카드 3</div>
+            <div class="card-sample-body">
+              <h4>강조 카드</h4>
+              <p>빨강 그라데이션을 사용한 강조 카드입니다.</p>
+            </div>
+          </div>
+
+          <div class="card-sample">
+            <div class="card-sample-image" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">카드 4</div>
+            <div class="card-sample-body">
+              <h4>주의 카드</h4>
+              <p>주황색 그라데이션을 사용한 주의 상태의 카드입니다.</p>
+            </div>
+          </div>
+
+          <div class="card-sample">
+            <div class="card-sample-image" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">카드 5</div>
+            <div class="card-sample-body">
+              <h4>보라색 카드</h4>
+              <p>보라색 그라데이션 배경의 카드입니다.</p>
+            </div>
+          </div>
+
+          <div class="card-sample">
+            <div class="card-sample-image" style="background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);">카드 6</div>
+            <div class="card-sample-body">
+              <h4>다크 카드</h4>
+              <p>어두운 배경의 카드로 대비를 이루는 디자인입니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 폼 탭 -->
+      <div id="forms" class="tab-content">
+        <div class="card">
+          <h2>📝 폼 요소</h2>
+          <p>입력 필드, 선택 상자, 텍스트 영역 등 폼 컴포넌트입니다.</p>
+        </div>
+
+        <div class="card">
+          <form>
+            <div class="form-group">
+              <label for="name">이름</label>
+              <input type="text" id="name" placeholder="홍길동을 입력하세요">
+            </div>
+
+            <div class="form-group">
+              <label for="email">이메일</label>
+              <input type="email" id="email" placeholder="example@example.com">
+            </div>
+
+            <div class="form-group">
+              <label for="category">카테고리</label>
+              <select id="category">
+                <option>선택하세요</option>
+                <option>공지사항</option>
+                <option>자유게시판</option>
+                <option>Q&A</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">메시지</label>
+              <textarea id="message" placeholder="의견을 입력해주세요"></textarea>
+            </div>
+
+            <div class="button-demo">
+              <button type="submit" class="btn btn-primary">제출</button>
+              <button type="reset" class="btn btn-outline">초기화</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- 색상 팔레트 탭 -->
+      <div id="tokens" class="tab-content">
+        <div class="card">
+          <h2>🎭 디자인 토큰</h2>
+          <p>프로젝트 전체에서 사용되는 색상 팔레트입니다.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="sub-title">주요 색상</h3>
+          <div class="color-grid">
+            <div class="color-box" style="background: #3498db;">Primary<br><code>#3498db</code></div>
+            <div class="color-box" style="background: #2ecc71;">Secondary<br><code>#2ecc71</code></div>
+            <div class="color-box" style="background: #e74c3c;">Accent<br><code>#e74c3c</code></div>
+            <div class="color-box" style="background: #f39c12;">Warning<br><code>#f39c12</code></div>
+            <div class="color-box" style="background: #27ae60;">Success<br><code>#27ae60</code></div>
+            <div class="color-box" style="background: #9b59b6;">Info<br><code>#9b59b6</code></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="sub-title">그레이스케일</h3>
+          <div class="color-grid">
+            <div class="color-box" style="background: #111827; color: white;">Black<br>#111827</div>
+            <div class="color-box" style="background: #1f2937; color: white;">Gray-900<br>#1f2937</div>
+            <div class="color-box" style="background: #374151; color: white;">Gray-700<br>#374151</div>
+            <div class="color-box" style="background: #4b5563; color: white;">Gray-600<br>#4b5563</div>
+            <div class="color-box" style="background: #6b7280;">
+              Gray-500<br>#6b7280
+            </div>
+            <div class="color-box" style="background: #9ca3af;">
+              Gray-400<br>#9ca3af
+            </div>
+            <div class="color-box" style="background: #d1d5db;">
+              Gray-300<br>#d1d5db
+            </div>
+            <div class="color-box" style="background: #e5e7eb;">
+              Gray-200<br>#e5e7eb
+            </div>
+            <div class="color-box" style="background: #f3f4f6;">
+              Gray-100<br>#f3f4f6
+            </div>
+            <div class="color-box" style="background: #f9fafb;">
+              Gray-50<br>#f9fafb
+            </div>
+            <div class="color-box" style="background: #ffffff; border: 1px solid #d1d5db;">
+              White<br>#ffffff
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 Component Gallery | <a href="index.html" style="color: inherit; text-decoration: none;">← 홈으로 돌아가기</a>
+  </footer>
+  <script src="js/app.js"></script>
+</body>
+</html>

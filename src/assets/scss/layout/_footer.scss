@@ -1,0 +1,16 @@
+/* 푸터 스타일  */
+@use '../base' as base;
+@use '../base/mixins' as mix;
+
+.footer {
+  background: base.$gray-600;
+  color: base.$white;
+  padding: base.$space-md;
+  text-align: center;
+  font-size: base.$font-size-sm;
+
+  @include mix.media(sm) {
+    padding: base.$space-sm;
+    font-size: base.$font-size-xs;
+  }
+}

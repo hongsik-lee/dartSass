@@ -1,0 +1,499 @@
+// 컴포넌트 갤러리 페이지 스타일
+@use '../base' as base;
+@use '../base/variables' as vars;
+@use '../base/mixins' as mix;
+@use '../components/button' as compbtn;
+@use '../components/card' as compcard;
+@use '../components/board' as compboard;
+@use 'sass:color' as color;
+
+// 로컬 변수
+$tab-border-color: base.$gray-200;
+$active-color: base.$primary;
+$text-secondary: base.$text-secondary;
+$text-muted: base.$text-muted;
+$bg-light: base.$bg-light;
+$border-radius: base.$radius-md;
+// 페이지 전용 사이즈
+$card-img-height: 140px;
+$board-num-size: 40px;
+$textarea-min-height: 100px;
+$color-box-height: 100px;
+
+// 탭 스타일
+.tab-container {
+  margin-bottom: base.$space-2xl;
+  @include mix.container;
+  @include mix.media-down(1000px) {
+    margin-bottom: base.$space-xl;
+    max-width: base.$max-width-md;
+  }
+
+  // 탭 버튼 그룹
+  .tab-buttons {
+    display: flex;
+    gap: base.$space-xs;
+    border-bottom: 2px solid $tab-border-color;
+    margin-bottom: base.$space-lg;
+    flex-wrap: wrap;
+  }
+
+  // 개별 탭 버튼
+  .tab-button {
+    @include mix.button-reset;
+    padding: base.$space-sm base.$space-lg;
+    border-bottom: 3px solid transparent;
+    font-size: base.$font-size-sm;
+    font-weight: base.$font-weight-semibold;
+    color: $text-secondary;
+    @include mix.transition;
+    margin-bottom: -1 * base.$space-xs;
+
+    &:hover {
+      color: $active-color;
+    }
+
+    &.active {
+      color: $active-color;
+      border-bottom-color: $active-color;
+    }
+  }
+
+  // 탭 콘텐츠
+  .tab-content {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+}
+
+// 버튼 스타일
+.button-demo {
+  @include mix.flex-center;
+  flex-wrap: wrap;
+  gap: base.$space-lg;
+  margin-bottom: base.$space-lg;
+
+  @include mix.media(md) {
+    gap: base.$space-md;
+  }
+
+  @include mix.media(sm) {
+    gap: base.$space-sm;
+    margin-bottom: base.$space-md;
+  }
+}
+
+.btn {
+  @include compbtn.btn-base;
+  @include mix.rounded($border-radius);
+  font-size: base.$font-size-sm;
+  font-weight: base.$font-weight-semibold;
+  @include mix.transition;
+
+  @include mix.media(sm) {
+    font-size: base.$font-size-xs;
+  }
+
+  // 크기 변형
+  &.btn-sm {
+    padding: base.$space-xs base.$space-sm;
+    font-size: base.$font-size-xs;
+
+    @include mix.media(sm) {
+      padding: 4px base.$space-xs;
+    }
+  }
+
+  &.btn-lg {
+    padding: base.$space-lg base.$space-2xl;
+    font-size: base.$font-size-lg;
+
+    @include mix.media(sm) {
+      padding: base.$space-md base.$space-lg;
+      font-size: base.$font-size-base;
+    }
+  }
+
+  // 색상 변형
+  &.btn-primary {
+    background: $active-color;
+    color: white;
+
+    &:hover {
+      background: color.adjust($active-color, $lightness: -20%);
+      transform: translateY(-2px);
+      @include mix.shadow(md);
+    }
+  }
+
+  &.btn-secondary {
+    background: base.$secondary;
+    color: white;
+
+    &:hover {
+      background: color.adjust(base.$secondary, $lightness: -20%);
+      transform: translateY(-2px);
+      @include mix.shadow(md);
+    }
+  }
+
+  &.btn-accent {
+    background: base.$accent;
+    color: white;
+
+    &:hover {
+      background: color.adjust(base.$accent, $lightness: -20%);
+      transform: translateY(-2px);
+      @include mix.shadow(md);
+    }
+  }
+
+  &.btn-outline {
+    background: white;
+    color: $active-color;
+    border: 2px solid $active-color;
+
+    &:hover {
+      background: $active-color;
+      color: white;
+    }
+  }
+
+  &.btn-disabled {
+    background: base.$gray-300;
+    color: base.$gray-400;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+// 타이포그래피 스타일
+.typography-grid {
+  @include mix.grid-auto(350px, base.$space-lg);
+
+  @include mix.media(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mix.media(md) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: base.$space-md;
+  }
+
+  @include mix.media(sm) {
+    grid-template-columns: 1fr;
+    gap: base.$space-sm;
+  }
+}
+
+.typography-item {
+  padding: base.$space-md;
+  background: $bg-light;
+  @include mix.rounded($border-radius);
+  @include mix.shadow(sm);
+  border-left: base.$space-xs solid $active-color;
+
+  @include mix.media(sm) {
+    padding: base.$space-sm;
+  }
+
+  // 제목 스타일
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    color: base.$text;
+  }
+
+  h1 { font-size: base.$font-size-6xl; }
+  h2 { font-size: base.$font-size-5xl; }
+  h3 { font-size: base.$font-size-3xl; }
+  h4 { font-size: base.$font-size-2xl; }
+  h5 { font-size: base.$font-size-xl; }
+  h6 { font-size: base.$font-size-lg; }
+
+  @include mix.media(md) {
+    h1 { font-size: base.$font-size-5xl; }
+    h2 { font-size: base.$font-size-4xl; }
+    h3 { font-size: base.$font-size-2xl; }
+    h4 { font-size: base.$font-size-xl; }
+    h5 { font-size: base.$font-size-lg; }
+    h6 { font-size: base.$font-size-base; }
+  }
+
+  @include mix.media(sm) {
+    h1 { font-size: base.$font-size-3xl; }
+    h2 { font-size: base.$font-size-2xl; }
+    h3 { font-size: base.$font-size-xl; }
+    h4 { font-size: base.$font-size-lg; }
+    h5 { font-size: base.$font-size-base; }
+    h6 { font-size: base.$font-size-sm; }
+  }
+
+  // 라벨
+  .label {
+    @include mix.font(base.$font-family-mono, base.$font-size-xs, vars.$font-weight-normal, vars.$line-height-normal);
+    color: base.$text-muted;
+    margin-top: base.$space-sm;
+
+    @include mix.media(sm) {
+      font-size: 10px;
+    }
+  }
+
+  // 본문
+  p {
+    margin: 0;
+    @include mix.font(vars.$font-family-base, base.$font-size-sm, vars.$font-weight-normal, base.$line-height-normal);
+
+    @include mix.media(sm) {
+      font-size: base.$font-size-xs;
+    }
+  }
+}
+
+// 카드 그리드 스타일
+.card-grid {
+  @include mix.grid-auto(240px, base.$space-md);
+
+  @include mix.media(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mix.media(sm) {
+    grid-template-columns: 1fr;
+    gap: base.$space-sm;
+  }
+}
+
+.card-sample {
+  @include compcard.card-base;
+  overflow: hidden;
+  @include mix.transition;
+
+  &:hover {
+    transform: translateY(-4px);
+    @include mix.shadow(lg);
+  }
+
+  // 카드 이미지
+  &-image {
+    height: $card-img-height;
+    background: linear-gradient(135deg, $active-color 0%, base.$accent 100%);
+    color: white;
+    @include mix.flex-center;
+    font-weight: bold;
+
+    @include mix.media(sm) {
+      height: 100px;
+    }
+  }
+
+  // 카드 본문
+  &-body {
+    padding: base.$space-md;
+
+    @include mix.media(sm) {
+      padding: base.$space-sm;
+    }
+
+    h4 {
+      margin: 0 0 base.$space-sm 0;
+      @include mix.heading(base.$font-size-lg, base.$font-weight-semibold);
+      color: base.$text;
+
+      @include mix.media(sm) {
+        font-size: base.$font-size-base;
+        margin-bottom: base.$space-xs;
+      }
+    }
+
+    p {
+      margin: 0;
+      @include mix.font(vars.$font-family-base, 13px, vars.$font-weight-normal, 1.5);
+      color: $text-secondary;
+
+      @include mix.media(sm) {
+        font-size: base.$font-size-sm;
+      }
+    }
+  }
+}
+
+// 게시판 스타일
+.board-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.board-item {
+  padding: base.$space-sm 0;
+  border-bottom: 1px solid $tab-border-color;
+  display: flex;
+  align-items: center;
+  gap: base.$space-sm;
+
+  @include mix.media(sm) {
+    padding: base.$space-xs 0;
+    gap: base.$space-xs;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.board-num {
+  flex-shrink: 0;
+  width: $board-num-size;
+  height: $board-num-size;
+  background: base.$gray-100;
+  @include mix.rounded(base.$radius-sm);
+  @include mix.flex-center;
+  font-weight: bold;
+  color: $text-secondary;
+  font-size: base.$font-size-xs;
+
+  @include mix.media(sm) {
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+  }
+}
+
+.board-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.board-title {
+  margin: 0;
+  font-size: base.$font-size-sm;
+  color: base.$text;
+
+  @include mix.media(sm) {
+    font-size: base.$font-size-xs;
+  }
+
+  a {
+    color: $active-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.board-meta {
+  margin: 4px 0 0 0;
+  font-size: base.$font-size-xs;
+  color: base.$gray-400;
+
+  @include mix.media(sm) {
+    font-size: 10px;
+    margin-top: 2px;
+  }
+}
+
+// 폼 스타일
+.form-group {
+  margin-bottom: 16px;
+
+  @include mix.media(sm) {
+    margin-bottom: 12px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: base.$font-size-sm;
+    font-weight: base.$font-weight-semibold;
+    color: base.$text;
+
+    @include mix.media(sm) {
+      font-size: base.$font-size-xs;
+      margin-bottom: 4px;
+    }
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: base.$space-sm base.$space-md;
+    border: 1px solid base.$border-color;
+    border-radius: $border-radius;
+    font-size: base.$font-size-sm;
+    font-family: inherit;
+    transition: base.$transition-base;
+
+    @include mix.media(sm) {
+      padding: base.$space-xs base.$space-sm;
+      font-size: base.$font-size-xs;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $active-color;
+      box-shadow: 0 0 0 3px rgba($active-color, 0.1);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: $textarea-min-height;
+
+    @include mix.media(sm) {
+      min-height: 80px;
+    }
+  }
+}
+
+// 색상 팔레트 스타일
+.color-grid {
+  @include mix.grid-auto(120px, base.$space-md);
+
+  @include mix.media(md) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: base.$space-sm;
+  }
+
+  @include mix.media(sm) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: base.$space-xs;
+  }
+}
+
+.color-box {
+  @include mix.rounded($border-radius);
+  height: $color-box-height;
+  @include mix.flex-center;
+  align-items: flex-end;
+  padding: 8px;
+  color: white;
+  font-size: 12px;
+  font-weight: base.$font-weight-semibold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+  @include mix.media(md) {
+    height: 80px;
+    font-size: 11px;
+    padding: 6px;
+  }
+
+  @include mix.media(sm) {
+    height: 60px;
+    font-size: 10px;
+    padding: 4px;
+  }
+}
+
+// 반응형 스타일
+@include mix.media(md) {
+  .typography-grid {
+    grid-template-columns: 1fr;
+  }
+}

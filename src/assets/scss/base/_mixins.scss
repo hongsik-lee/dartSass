@@ -1,0 +1,318 @@
+// ============================================
+// 공통 믹스인들 (Common Mixins)
+// ============================================
+
+@use 'variables' as vars;
+@use 'functions' as func;
+@use 'sass:color' as color;
+
+// ========== 레이아웃 믹스인 ==========
+
+/// 컨테이너 — 최대 너비 + 가운데 정렬
+/// @param {number} $max - 최대 너비 (기본값: 1200px)
+@mixin container($max: vars.$max-width-container) {
+  width: 100%;
+  max-width: $max;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: vars.$container-padding-x;
+  padding-right: vars.$container-padding-x;
+}
+
+/// Flexbox 중앙 정렬
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/// Flexbox 양쪽 정렬 (space-between)
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/// Flexbox 세로 정렬
+@mixin flex-column($gap: 0) {
+  display: flex;
+  flex-direction: column;
+  @if $gap != 0 {
+    gap: $gap;
+  }
+}
+
+/// Grid 중앙 정렬
+@mixin grid-center {
+  display: grid;
+  place-items: center;
+}
+
+/// Grid 자동 응답형 (auto-fit)
+@mixin grid-auto($min-size: 250px, $gap: vars.$space-md) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-size, 1fr));
+  gap: $gap;
+}
+
+/// 절대 위치 중앙 정렬
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// ========== 반응형 디자인 ==========
+
+/// 미디어 쿼리 — min-width 기반
+/// @param {string} $breakpoint - xs, sm, md, lg, xl, 2xl 또는 픽셀값
+@mixin media($breakpoint) {
+  @if $breakpoint == xs {
+    @media (min-width: vars.$breakpoint-xs) { @content; }
+  } @else if $breakpoint == sm {
+    @media (min-width: vars.$breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: vars.$breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: vars.$breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: vars.$breakpoint-xl) { @content; }
+  } @else if $breakpoint == 2xl {
+    @media (min-width: vars.$breakpoint-2xl) { @content; }
+  } @else {
+    @media (min-width: $breakpoint) { @content; }
+  }
+}
+
+/// 미디어 쿼리 — max-width 기반 (아래로 가기)
+/// @param {number} $breakpoint - 브레이크포인트 (px)
+@mixin media-down($breakpoint) {
+  @media (max-width: calc($breakpoint - 1px)) { @content; }
+}
+
+// ========== 타이포그래피 ==========
+
+/// 기본 폰트 설정
+/// @param {string} $family - 폰트 패밀리
+/// @param {number} $size - 폰트 크기
+/// @param {number} $weight - 폰트 굵기
+/// @param {number} $lineheight - 줄 높이
+@mixin font(
+  $family: vars.$font-family-base,
+  $size: vars.$font-size-base,
+  $weight: vars.$font-weight-normal,
+  $lineheight: vars.$line-height-normal
+) {
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineheight;
+}
+
+/// 제목 스타일 (h1-h6)
+@mixin heading($size: vars.$font-size-2xl, $weight: vars.$font-weight-bold) {
+  font-family: vars.$font-family-heading;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: vars.$line-height-tight;
+}
+
+/// 텍스트 크기 조정 방지
+@mixin text-size-adjust {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/// 텍스트 한 줄 말줄임 (ellipsis)
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/// 여러 줄 말줄임
+/// @param {number} $lines - 표시할 줄 수
+@mixin line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/// 글자 간격
+@mixin letter-space($value: 0.05em) {
+  letter-spacing: $value;
+}
+
+// ========== 버튼/인풋 리셋 ==========
+
+/// 버튼 기본 스타일 제거
+@mixin button-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
+
+/// 링크 기본 스타일 제거
+@mixin link-reset {
+  text-decoration: none;
+  color: inherit;
+  
+  &:visited {
+    color: inherit;
+  }
+}
+
+/// 인풋 기본 스타일 제거
+@mixin input-reset {
+  border: 1px solid vars.$border-color;
+  border-radius: vars.$radius-md;
+  padding: vars.$space-sm vars.$space-md;
+  font-family: vars.$font-family-base;
+  font-size: vars.$font-size-base;
+  
+  &:focus {
+    outline: none;
+    border-color: vars.$primary;
+    box-shadow: 0 0 0 3px rgba(vars.$primary, 0.1);
+  }
+}
+
+// ========== 시각 효과 ==========
+
+/// 그림자
+/// @param {string} $level - xs, sm, md, lg, xl, 2xl, inner
+@mixin shadow($level: md) {
+  @if $level == xs {
+    box-shadow: vars.$shadow-xs;
+  } @else if $level == sm {
+    box-shadow: vars.$shadow-sm;
+  } @else if $level == md {
+    box-shadow: vars.$shadow-md;
+  } @else if $level == lg {
+    box-shadow: vars.$shadow-lg;
+  } @else if $level == xl {
+    box-shadow: vars.$shadow-xl;
+  } @else if $level == 2xl {
+    box-shadow: vars.$shadow-2xl;
+  } @else if $level == inner {
+    box-shadow: vars.$shadow-inner;
+  }
+}
+
+/// 호버 효과 — 밝아짐
+/// @param {number} $amount - 밝아지는 비율
+/// @param {color} $base-color - 기준 색상
+@mixin hover-light($amount: 10%, $base-color: vars.$primary) {
+  transition: background-color vars.$transition-base;
+  
+  &:hover {
+    background-color: color.adjust($base-color, $lightness: $amount);
+  }
+}
+
+/// 트랜지션
+/// @param {string} $property - CSS 속성 (또는 all)
+/// @param {string} $duration - 지속시간
+@mixin transition($property: all, $duration: vars.$transition-base) {
+  transition: $property $duration;
+}
+
+/// 부드러운 모든 전환
+@mixin smooth-transition {
+  transition: all vars.$transition-base;
+}
+
+/// 보더 라디우스
+/// @param {number} $radius - 라디우스 크기
+@mixin rounded($radius: vars.$radius-md) {
+  border-radius: $radius;
+}
+
+// ========== 접근성 ==========
+
+/// 화면 리더 전용 텍스트 (시각적으로 숨김)
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/// sr-only 해제
+@mixin not-sr-only {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+// ========== 브라우저 호환성 ==========
+
+/// appearance 제거
+@mixin appearance {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/// 사용자 선택 불가
+@mixin user-select($value: none) {
+  -webkit-user-select: $value;
+  -moz-user-select: $value;
+  -ms-user-select: $value;
+  user-select: $value;
+}
+
+/// 포인터 이벤트 무시
+@mixin pointer-events($value: none) {
+  pointer-events: $value;
+}
+
+// ========== 유틸리티 ==========
+
+/// 비율 박스 (aspect ratio)
+/// @param {number} $width - 너비
+/// @param {number} $height - 높이
+@mixin aspect-ratio($width: 16, $height: 9) {
+  position: relative;
+  padding-bottom: calc(($height / $width) * 100%);
+  
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/// 화면에서 완전히 숨김
+@mixin hide-visually {
+  display: none !important;
+}
+
+/// 스크롤 부드럽게
+@mixin smooth-scroll {
+  scroll-behavior: smooth;
+}

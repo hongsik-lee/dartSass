@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sass 함수/믹스인 사용법</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <h2 class="header-title">Dart Sass Project</h2>
+    <a href="index.html" class="btn-login">홈으로</a>
+  </header>
+
+  <main class="container sass-guide-page" id="top">
+    <section class="sass-guide-intro">
+      <h1>Sass 사용법 가이드</h1>
+      <p>
+        <strong>base/_functions.scss</strong>와 <strong>base/_mixins.scss</strong>의 항목을
+        각각 한 번씩 실제 스타일에 적용한 예시 페이지입니다.
+      </p>
+      <a class="sass-guide-jump" href="#utility-mixins">유틸리티 믹스인으로 이동</a>
+    </section>
+
+    <section class="sass-guide-section" id="functions">
+      <h2>함수 예시 (functions.scss)</h2>
+      <div class="sass-guide-grid">
+        <article class="sass-example-card">
+          <h3>rem()</h3>
+          <p class="sass-example-desc">px 값을 rem으로 변환합니다.</p>
+          <p class="func-rem-text">24px → rem 변환 텍스트</p>
+          <p class="sass-example-code">font-size: func.rem(24px);</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>em()</h3>
+          <p class="sass-example-desc">기준 폰트 크기를 기준으로 em 단위를 계산합니다.</p>
+          <div class="func-em-parent">
+            부모(20px)
+            <span class="func-em-child">자식(24px 기준 em)</span>
+          </div>
+          <p class="sass-example-code">font-size: func.em(24px, 20px);</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>strip-unit()</h3>
+          <p class="sass-example-desc">단위를 제거해 순수 숫자로 변환합니다.</p>
+          <div class="func-strip-unit-box">단위 제거 후 다시 px 조합</div>
+          <p class="sass-example-code">width: func.strip-unit(180px) * 1px;</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>lighten()</h3>
+          <p class="sass-example-desc">기본 색상을 더 밝게 만듭니다.</p>
+          <div class="func-lighten-box">밝아진 primary 색상</div>
+          <p class="sass-example-code">background: func.lighten(vars.$primary, 12%);</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>darken()</h3>
+          <p class="sass-example-desc">기본 색상을 더 어둡게 만듭니다.</p>
+          <div class="func-darken-box">어두워진 primary 색상</div>
+          <p class="sass-example-code">background: func.darken(vars.$primary, 12%);</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>rgba-color()</h3>
+          <p class="sass-example-desc">색상에 투명도를 적용합니다.</p>
+          <div class="func-rgba-box">primary 20% 투명도</div>
+          <p class="sass-example-code">background: func.rgba-color(vars.$primary, 0.2);</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>fluid()</h3>
+          <p class="sass-example-desc">clamp(min, preferred, max) 값을 빠르게 만듭니다.</p>
+          <div class="func-fluid-box">화면 크기에 따라 너비가 바뀌는 박스</div>
+          <p class="sass-example-code">width: func.fluid(160px, 35vw, 360px);</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>fluid-font()</h3>
+          <p class="sass-example-desc">뷰포트에 따라 폰트 크기를 유동적으로 조절합니다.</p>
+          <p class="func-fluid-font">모바일~데스크톱에서 폰트 크기 자동 조절</p>
+          <p class="sass-example-code">font-size: func.fluid-font(16px, 32px);</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sass-guide-section" id="layout-mixins">
+      <h2>레이아웃 믹스인</h2>
+      <div class="sass-guide-grid">
+        <article class="sass-example-card">
+          <h3>container()</h3>
+          <div class="mix-container-demo">container 믹스인 영역</div>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>flex-center()</h3>
+          <div class="mix-flex-center-demo">가운데 정렬</div>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>flex-between()</h3>
+          <div class="mix-flex-between-demo">
+            <span>왼쪽</span>
+            <span>오른쪽</span>
+          </div>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>flex-column()</h3>
+          <div class="mix-flex-column-demo">
+            <span>첫 번째</span>
+            <span>두 번째</span>
+            <span>세 번째</span>
+          </div>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>grid-center()</h3>
+          <div class="mix-grid-center-demo">Grid 중앙</div>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>grid-auto()</h3>
+          <div class="mix-grid-auto-demo">
+            <span>1</span><span>2</span><span>3</span>
+          </div>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>absolute-center()</h3>
+          <div class="mix-absolute-wrap">
+            <span class="mix-absolute-target">정중앙</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="sass-guide-section" id="responsive-mixins">
+      <h2>반응형 믹스인</h2>
+      <article class="sass-example-card">
+        <h3>media() + media-down()</h3>
+        <p class="sass-example-desc">화면 너비를 바꿔 배경색과 폰트 크기 변화를 확인하세요.</p>
+        <div class="mix-media-demo">브레이크포인트 반응 박스</div>
+      </article>
+    </section>
+
+    <section class="sass-guide-section" id="typography-mixins">
+      <h2>타이포그래피 믹스인</h2>
+      <div class="sass-guide-grid">
+        <article class="sass-example-card">
+          <h3>font()</h3>
+          <p class="mix-font-demo">font 믹스인 적용 텍스트</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>heading()</h3>
+          <p class="mix-heading-demo">Heading 믹스인 제목</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>text-size-adjust()</h3>
+          <p class="mix-text-size-adjust-demo">모바일 텍스트 자동 확대를 방지하는 설정</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>truncate()</h3>
+          <p class="mix-truncate-demo">매우 긴 텍스트를 한 줄로 말줄임 처리하는 예시입니다. 매우 긴 텍스트를 한 줄로 말줄임 처리하는 예시입니다.</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>line-clamp()</h3>
+          <p class="mix-line-clamp-demo">여러 줄 텍스트를 지정한 줄 수로 자르는 예시입니다. 이 문장은 line-clamp를 확인하기 위한 더미 텍스트이며, 카드 높이 안에서 3줄까지만 표시됩니다.</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>letter-space()</h3>
+          <p class="mix-letter-space-demo">LETTER SPACING DEMO</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sass-guide-section" id="reset-mixins">
+      <h2>리셋 믹스인</h2>
+      <div class="sass-guide-grid">
+        <article class="sass-example-card">
+          <h3>button-reset()</h3>
+          <button type="button" class="mix-button-reset-demo">버튼 리셋 후 커스텀</button>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>link-reset()</h3>
+          <a href="#top" class="mix-link-reset-demo">링크 리셋 스타일</a>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>input-reset()</h3>
+          <input class="mix-input-reset-demo" type="text" placeholder="인풋 리셋 예시">
+        </article>
+      </div>
+    </section>
+
+    <section class="sass-guide-section" id="effect-mixins">
+      <h2>시각 효과 믹스인</h2>
+      <div class="sass-guide-grid">
+        <article class="sass-example-card">
+          <h3>shadow()</h3>
+          <div class="mix-shadow-demo-wrap">
+            <span class="mix-shadow-demo-xs">xs</span>
+            <span class="mix-shadow-demo-sm">sm</span>
+            <span class="mix-shadow-demo-md">md</span>
+            <span class="mix-shadow-demo-lg">lg</span>
+            <span class="mix-shadow-demo-xl">xl</span>
+            <span class="mix-shadow-demo-2xl">2xl</span>
+            <span class="mix-shadow-demo-inner">inner</span>
+          </div>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>hover-light()</h3>
+          <button type="button" class="mix-hover-light-demo">호버 시 밝아짐</button>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>transition()</h3>
+          <div class="mix-transition-demo">마우스를 올려보세요</div>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>smooth-transition()</h3>
+          <div class="mix-smooth-transition-demo">모든 속성 부드러운 전환</div>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>rounded()</h3>
+          <div class="mix-rounded-demo">둥근 모서리</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="sass-guide-section" id="a11y-mixins">
+      <h2>접근성 믹스인</h2>
+      <div class="sass-guide-grid">
+        <article class="sass-example-card">
+          <h3>sr-only()</h3>
+          <p class="mix-sr-only-demo">이 문장은 스크린 리더 전용 텍스트입니다.</p>
+          <p class="sass-example-desc">시각적으로는 숨기고 보조기기에는 노출합니다.</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>not-sr-only()</h3>
+          <p class="mix-not-sr-only-demo">숨김 해제 텍스트</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sass-guide-section" id="browser-mixins">
+      <h2>브라우저 호환성 믹스인</h2>
+      <div class="sass-guide-grid">
+        <article class="sass-example-card">
+          <h3>appearance()</h3>
+          <select class="mix-appearance-demo">
+            <option>기본 화살표 제거</option>
+          </select>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>user-select()</h3>
+          <p class="mix-user-select-demo">드래그해도 텍스트 선택이 되지 않습니다.</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>pointer-events()</h3>
+          <button type="button" class="mix-pointer-events-demo">클릭 비활성화</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="sass-guide-section" id="utility-mixins">
+      <h2>유틸리티 믹스인</h2>
+      <div class="sass-guide-grid">
+        <article class="sass-example-card">
+          <h3>aspect-ratio()</h3>
+          <div class="mix-aspect-ratio-demo">
+            <div class="mix-aspect-ratio-content">16 : 9 고정 비율</div>
+          </div>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>hide-visually()</h3>
+          <p class="mix-hide-visually-demo">이 텍스트는 완전히 숨김 처리됩니다.</p>
+          <p class="sass-example-desc">위 문장은 렌더링되지 않습니다.</p>
+        </article>
+
+        <article class="sass-example-card">
+          <h3>smooth-scroll()</h3>
+          <a class="sass-guide-jump" href="#top">페이지 상단으로 부드럽게 이동</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">&copy; 2026 Dart Sass Project</footer>
+  <script src="js/app.js"></script>
+</body>
+</html>

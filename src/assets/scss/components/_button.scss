@@ -1,0 +1,24 @@
+// 기본 버튼 스타일 (base 토큰 사용)
+@use '../base' as base;
+@use '../base/mixins' as mix;
+
+
+@mixin btn-base {
+  margin: base.$space-sm;
+  padding: base.$space-sm base.$space-md;
+  border: none;
+  border-radius: base.$radius-sm;
+  font-size: base.$font-size-base;
+  cursor: pointer;
+  @include mix.transition;
+
+  @include mix.media(sm) {
+    padding: base.$space-xs base.$space-sm;
+    font-size: base.$font-size-sm;
+    margin: base.$space-xs;
+  }
+}
+
+.btn_blue { @include btn-base; background-color: base.$primary; color: base.$white; }
+.btn_green { @include btn-base; background-color: base.$secondary; color: base.$white; }
+.btn_yellow { @include btn-base; background-color: base.$accent; color: base.$white; }

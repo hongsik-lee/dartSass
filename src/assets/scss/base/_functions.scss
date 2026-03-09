@@ -1,0 +1,90 @@
+// ============================================
+// 유틸 함수들 (Utility Functions)
+// ============================================
+
+@use 'sass:math' as math;
+@use 'sass:color' as color;
+
+// ========== 단위 변환 함수 ==========
+
+/// px를 rem으로 변환
+/// @param {number} $px - 픽셀 값
+/// @param {number} $base - 기본 픽셀 값 (기본값: 16px)
+/// @return {number} rem 단위 값
+@function rem($px, $base: 16px) {
+  @if not math.is-unitless($px) {
+    $px: strip-unit($px);
+  }
+  @if not math.is-unitless($base) {
+    $base: strip-unit($base);
+  }
+  @return math.div($px, $base) * 1rem;
+}
+
+/// px를 em으로 변환
+/// @param {number} $px - 픽셀 값
+/// @param {number} $base - 기본 픽셀 값
+/// @return {number} em 단위 값
+@function em($px, $base: 16px) {
+  @if not math.is-unitless($px) {
+    $px: strip-unit($px);
+  }
+  @if not math.is-unitless($base) {
+    $base: strip-unit($base);
+  }
+  @return math.div($px, $base) * 1em;
+}
+
+/// 단위 제거
+/// @param {number} $value - 단위가 있는 수
+/// @return {number} 단위 없는 수
+@function strip-unit($value) {
+  @return math.div($value, ($value * 0 + 1));
+}
+
+// ========== 색상 함수 ==========
+
+/// 명도 증가 (Dart Sass color.adjust 권장)
+/// @param {color} $color - 기본 색상
+/// @param {number} $amount - 증가량 (0-100)
+/// @return {color} 밝아진 색상
+@function lighten($color, $amount: 10%) {
+  @return color.adjust($color, $lightness: $amount);
+}
+
+/// 명도 감소
+/// @param {color} $color - 기본 색상
+/// @param {number} $amount - 감소량 (0-100)
+/// @return {color} 어두워진 색상
+@function darken($color, $amount: 10%) {
+  @return color.adjust($color, $lightness: -$amount);
+}
+
+/// 색상 투명도
+/// @param {color} $color - 기본 색상
+/// @param {number} $opacity - 투명도 (0-1)
+/// @return {color} 투명도 적용된 색상
+@function rgba-color($color, $opacity: 0.5) {
+  @return rgba($color, $opacity);
+}
+
+// ========== 유동성 함수 ==========
+
+/// clamp 함수로 유동적 크기 설정
+/// @param {number} $min - 최소값
+/// @param {number} $preferred - 선호값 (vw 또는 calc)
+/// @param {number} $max - 최대값
+/// @return {value} clamp 값
+@function fluid($min, $preferred, $max) {
+  @return clamp(#{$min}, #{$preferred}, #{$max});
+}
+
+/// 반응형 폰트 크기 (vw 기반)
+/// @param {number} $mobile - 모바일 크기
+/// @param {number} $desktop - 데스크톱 크기
+/// @return {value} clamp를 이용한 유동적 크기
+@function fluid-font($mobile, $desktop) {
+  $slope: calc(($desktop - $mobile) / (1920 - 375));
+  $intercept: calc($mobile - $slope * 375);
+  @return clamp(#{$mobile}, #{$slope}vw + #{$intercept}, #{$desktop});
+}

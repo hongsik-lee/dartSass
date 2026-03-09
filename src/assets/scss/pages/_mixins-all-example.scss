@@ -1,0 +1,596 @@
+// ============================================
+// Sass 사용법 페이지 (functions + mixins 예시)
+// ============================================
+
+@use '../base/functions' as func;
+@use '../base/mixins' as mix;
+@use '../base/variables' as vars;
+
+// 페이지 기본 스타일
+// 한글 설명: 페이지 전체에 기본 폰트/스크롤/텍스트 설정을 적용합니다.
+.sass-guide-page {
+  @include mix.font();
+  @include mix.smooth-scroll;
+  @include mix.text-size-adjust;
+
+  color: vars.$text;
+  padding-bottom: vars.$space-3xl;
+}
+
+// 소개 영역
+// 한글 설명: 페이지 제목/요약/이동 링크 스타일입니다.
+.sass-guide-intro {
+  margin-bottom: vars.$space-xl;
+  padding: vars.$space-xl;
+  border: 1px solid vars.$border-color;
+  background: vars.$white;
+  @include mix.rounded(vars.$radius-lg);
+  @include mix.shadow(sm);
+
+  h1 {
+    margin: 0 0 vars.$space-sm;
+    @include mix.heading(vars.$font-size-4xl, vars.$font-weight-bold);
+  }
+
+  p {
+    margin: 0 0 vars.$space-md;
+    color: vars.$text-secondary;
+  }
+}
+
+// 공통 섹션 블록
+// 한글 설명: 함수/믹스인 카테고리 공통 박스 스타일입니다.
+.sass-guide-section {
+  margin-bottom: vars.$space-xl;
+
+  h2 {
+    margin: 0 0 vars.$space-md;
+    @include mix.heading(vars.$font-size-2xl, vars.$font-weight-semibold);
+    color: vars.$primary;
+  }
+}
+
+// 카드 그리드
+// 한글 설명: grid-auto 믹스인으로 반응형 카드 배치를 만듭니다.
+.sass-guide-grid {
+  @include mix.grid-auto(260px, vars.$space-md);
+}
+
+// 공통 예시 카드
+// 한글 설명: 각각의 함수/믹스인 샘플을 담는 카드입니다.
+.sass-example-card {
+  cursor: pointer;
+  perspective: 1200px;
+  min-height: 210px;
+
+  h3 {
+    margin: 0 0 vars.$space-sm;
+    @include mix.heading(vars.$font-size-lg, vars.$font-weight-semibold);
+  }
+}
+
+// 카드 내부 3D 회전 컨테이너
+// 한글 설명: 카드 앞/뒷면을 같은 위치에 겹치고, rotateY로 뒤집습니다.
+.sass-example-card-inner {
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform vars.$transition-base;
+}
+
+// 카드가 뒤집힌 상태
+// 한글 설명: 카드에 is-flipped 클래스가 붙으면 180도 회전합니다.
+.sass-example-card.is-flipped .sass-example-card-inner {
+  transform: rotateY(180deg);
+}
+
+// 앞/뒷면 공통
+// 한글 설명: 양면 공통 박스 스타일입니다.
+.sass-example-face {
+  grid-area: 1 / 1;
+  padding: vars.$space-md;
+  border: 1px solid vars.$border-color;
+  background: vars.$white;
+  @include mix.rounded(vars.$radius-md);
+  @include mix.shadow(xs);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+// 카드 뒷면
+// 한글 설명: Sass 문법 코드를 표시하는 뒷면입니다.
+.sass-example-face--back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-sm;
+}
+
+// 뒤집기 안내 문구
+// 한글 설명: 카드 클릭으로 앞/뒷면 전환을 안내합니다.
+.sass-flip-hint {
+  margin: vars.$space-sm 0 0;
+  font-size: vars.$font-size-xs;
+  color: vars.$text-muted;
+}
+
+.sass-flip-hint--back {
+  margin-top: auto;
+}
+
+// 뒷면 제목
+// 한글 설명: 현재 카드의 Sass 문법 제목입니다.
+.sass-flip-title {
+  margin: 0;
+  font-weight: vars.$font-weight-semibold;
+  color: vars.$primary;
+}
+
+// Sass 문법 코드 영역
+// 한글 설명: 뒷면에서 실제 Sass 문법을 출력합니다.
+.sass-example-syntax {
+  margin: 0;
+  padding: vars.$space-sm;
+  border: 1px solid vars.$border-color;
+  background: vars.$gray-50;
+  @include mix.rounded(vars.$radius-sm);
+  font-family: vars.$font-family-mono;
+  font-size: vars.$font-size-xs;
+  line-height: vars.$line-height-normal;
+  color: vars.$text;
+  white-space: pre-wrap;
+}
+
+// 설명/코드 텍스트 공통
+// 한글 설명: 카드 내부 설명 문장과 코드 라벨 스타일입니다.
+.sass-example-desc {
+  margin: 0 0 vars.$space-sm;
+  color: vars.$text-secondary;
+}
+
+.sass-example-code {
+  margin: vars.$space-sm 0 0;
+  font-family: vars.$font-family-mono;
+  font-size: vars.$font-size-xs;
+  color: vars.$text-muted;
+}
+
+// 점프 링크
+// 한글 설명: 페이지 내부 이동 링크 스타일입니다.
+.sass-guide-jump {
+  @include mix.link-reset;
+  display: inline-block;
+  padding: vars.$space-sm vars.$space-md;
+  border: 1px solid vars.$primary;
+  color: vars.$primary;
+  @include mix.rounded(vars.$radius-sm);
+  @include mix.transition(background-color);
+
+  &:hover {
+    background: func.rgba-color(vars.$primary, 0.08);
+  }
+}
+
+// =====================================================
+// functions.scss 예시
+// =====================================================
+
+// rem() 함수
+// 한글 설명: 24px을 rem으로 변환하여 폰트 크기를 설정합니다.
+.func-rem-text {
+  font-size: func.rem(24px);
+  font-weight: vars.$font-weight-semibold;
+}
+
+// em() 함수
+// 한글 설명: 부모 20px 기준으로 자식 폰트 크기를 em으로 계산합니다.
+.func-em-parent {
+  font-size: 20px;
+  color: vars.$text-secondary;
+}
+
+.func-em-child {
+  display: inline-block;
+  margin-left: vars.$space-sm;
+  font-size: func.em(24px, 20px);
+  color: vars.$text;
+  font-weight: vars.$font-weight-semibold;
+}
+
+// strip-unit() 함수
+// 한글 설명: 180px에서 단위를 제거한 뒤 다시 px를 곱해 활용합니다.
+.func-strip-unit-box {
+  width: func.strip-unit(180px) * 1px;
+  padding: vars.$space-sm;
+  background: vars.$gray-100;
+  border: 1px dashed vars.$gray-400;
+}
+
+// lighten() 함수
+// 한글 설명: primary 색상을 12% 밝게 조정합니다.
+.func-lighten-box {
+  padding: vars.$space-sm;
+  background: func.lighten(vars.$primary, 12%);
+  color: vars.$white;
+  @include mix.rounded(vars.$radius-sm);
+}
+
+// darken() 함수
+// 한글 설명: primary 색상을 12% 어둡게 조정합니다.
+.func-darken-box {
+  padding: vars.$space-sm;
+  background: func.darken(vars.$primary, 12%);
+  color: vars.$white;
+  @include mix.rounded(vars.$radius-sm);
+}
+
+// rgba-color() 함수
+// 한글 설명: primary 색상에 20% 투명도를 적용합니다.
+.func-rgba-box {
+  padding: vars.$space-sm;
+  background: func.rgba-color(vars.$primary, 0.2);
+  border: 1px solid func.rgba-color(vars.$primary, 0.45);
+  @include mix.rounded(vars.$radius-sm);
+}
+
+// fluid() 함수
+// 한글 설명: clamp를 사용해 너비를 유동적으로 변경합니다.
+.func-fluid-box {
+  width: func.fluid(160px, 35vw, 360px);
+  padding: vars.$space-sm;
+  background: vars.$gray-100;
+  border: 1px solid vars.$border-color;
+}
+
+// fluid-font() 함수
+// 한글 설명: 화면 너비에 따라 폰트 크기가 자동 조절됩니다.
+.func-fluid-font {
+  margin: 0;
+  font-size: func.fluid-font(16px, 32px);
+  font-weight: vars.$font-weight-bold;
+}
+
+// =====================================================
+// layout mixins 예시
+// =====================================================
+
+// container() 믹스인
+// 한글 설명: 최대 너비와 좌우 패딩, 가운데 정렬을 적용합니다.
+.mix-container-demo {
+  @include mix.container(680px);
+  padding-top: vars.$space-sm;
+  padding-bottom: vars.$space-sm;
+  border: 1px dashed vars.$gray-400;
+  background: vars.$gray-50;
+}
+
+// flex-center() 믹스인
+// 한글 설명: 가로/세로 가운데 정렬을 적용합니다.
+.mix-flex-center-demo {
+  @include mix.flex-center;
+  min-height: 90px;
+  border: 1px solid vars.$border-color;
+  background: vars.$gray-50;
+}
+
+// flex-between() 믹스인
+// 한글 설명: 좌우 끝 정렬(space-between)을 적용합니다.
+.mix-flex-between-demo {
+  @include mix.flex-between;
+  padding: vars.$space-sm;
+  border: 1px solid vars.$border-color;
+  background: vars.$gray-50;
+}
+
+// flex-column() 믹스인
+// 한글 설명: 세로 방향 정렬과 간격(gap)을 적용합니다.
+.mix-flex-column-demo {
+  @include mix.flex-column(vars.$space-sm);
+
+  span {
+    padding: vars.$space-xs vars.$space-sm;
+    background: vars.$gray-100;
+    @include mix.rounded(vars.$radius-xs);
+  }
+}
+
+// grid-center() 믹스인
+// 한글 설명: Grid 컨텍스트에서 정중앙 배치를 적용합니다.
+.mix-grid-center-demo {
+  @include mix.grid-center;
+  min-height: 90px;
+  border: 1px solid vars.$border-color;
+  background: vars.$gray-50;
+}
+
+// grid-auto() 믹스인
+// 한글 설명: 최소 크기 기반 auto-fit 반응형 그리드를 적용합니다.
+.mix-grid-auto-demo {
+  @include mix.grid-auto(70px, vars.$space-xs);
+
+  span {
+    @include mix.grid-center;
+    min-height: 50px;
+    background: vars.$gray-100;
+    @include mix.rounded(vars.$radius-xs);
+  }
+}
+
+// absolute-center() 믹스인
+// 한글 설명: 절대 위치 요소를 부모 정중앙에 배치합니다.
+.mix-absolute-wrap {
+  position: relative;
+  min-height: 100px;
+  border: 1px solid vars.$border-color;
+  background: vars.$gray-50;
+}
+
+.mix-absolute-target {
+  @include mix.absolute-center;
+  padding: vars.$space-xs vars.$space-sm;
+  background: vars.$primary;
+  color: vars.$white;
+  @include mix.rounded(vars.$radius-xs);
+}
+
+// =====================================================
+// responsive mixins 예시
+// =====================================================
+
+// media(), media-down() 믹스인
+// 한글 설명: 화면 크기에 따라 배경/폰트 크기가 바뀌는 반응형 예시입니다.
+.mix-media-demo {
+  padding: vars.$space-md;
+  background: vars.$gray-100;
+  border: 1px solid vars.$border-color;
+  @include mix.rounded(vars.$radius-sm);
+
+  @include mix.media(md) {
+    background: func.rgba-color(vars.$secondary, 0.25);
+  }
+
+  @include mix.media-down(vars.$breakpoint-sm) {
+    font-size: vars.$font-size-sm;
+  }
+}
+
+// =====================================================
+// typography mixins 예시
+// =====================================================
+
+// font() 믹스인
+// 한글 설명: 폰트 패밀리/크기/굵기/줄높이를 한 번에 지정합니다.
+.mix-font-demo {
+  @include mix.font(
+    $family: vars.$font-family-base,
+    $size: vars.$font-size-lg,
+    $weight: vars.$font-weight-medium,
+    $lineheight: vars.$line-height-relaxed
+  );
+}
+
+// heading() 믹스인
+// 한글 설명: 제목 텍스트 규칙을 재사용합니다.
+.mix-heading-demo {
+  margin: 0;
+  @include mix.heading(vars.$font-size-2xl, vars.$font-weight-bold);
+}
+
+// text-size-adjust() 믹스인
+// 한글 설명: 모바일 브라우저 자동 텍스트 확대를 제어합니다.
+.mix-text-size-adjust-demo {
+  @include mix.text-size-adjust;
+}
+
+// truncate() 믹스인
+// 한글 설명: 한 줄을 넘어가는 텍스트를 ... 으로 줄입니다.
+.mix-truncate-demo {
+  @include mix.truncate;
+  max-width: 100%;
+}
+
+// line-clamp() 믹스인
+// 한글 설명: 여러 줄 텍스트를 지정 줄 수(3줄)로 제한합니다.
+.mix-line-clamp-demo {
+  @include mix.line-clamp(3);
+}
+
+// letter-space() 믹스인
+// 한글 설명: 글자 간격을 조절해 가독성을 변경합니다.
+.mix-letter-space-demo {
+  @include mix.letter-space(0.12em);
+  font-weight: vars.$font-weight-semibold;
+}
+
+// =====================================================
+// reset mixins 예시
+// =====================================================
+
+// button-reset() 믹스인
+// 한글 설명: 버튼 기본 스타일을 제거하고 커스텀합니다.
+.mix-button-reset-demo {
+  @include mix.button-reset;
+  padding: vars.$space-sm vars.$space-md;
+  background: vars.$primary;
+  color: vars.$white;
+  @include mix.rounded(vars.$radius-sm);
+  @include mix.transition(background-color);
+
+  &:hover {
+    background: func.darken(vars.$primary, 8%);
+  }
+}
+
+// link-reset() 믹스인
+// 한글 설명: 링크 기본 색/밑줄을 제거한 뒤 재정의합니다.
+.mix-link-reset-demo {
+  @include mix.link-reset;
+  color: vars.$secondary;
+  font-weight: vars.$font-weight-semibold;
+}
+
+// input-reset() 믹스인
+// 한글 설명: 인풋 기본 스타일을 통일된 토큰 값으로 맞춥니다.
+.mix-input-reset-demo {
+  @include mix.input-reset;
+  width: 100%;
+}
+
+// =====================================================
+// effects mixins 예시
+// =====================================================
+
+// shadow() 믹스인
+// 한글 설명: 그림자 단계별 스타일(xs ~ inner)을 적용합니다.
+.mix-shadow-demo-wrap {
+  @include mix.grid-auto(80px, vars.$space-xs);
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    background: vars.$white;
+    border-radius: vars.$radius-sm;
+    border: 1px solid vars.$border-color;
+    font-size: vars.$font-size-xs;
+  }
+}
+
+.mix-shadow-demo-xs { @include mix.shadow(xs); }
+.mix-shadow-demo-sm { @include mix.shadow(sm); }
+.mix-shadow-demo-md { @include mix.shadow(md); }
+.mix-shadow-demo-lg { @include mix.shadow(lg); }
+.mix-shadow-demo-xl { @include mix.shadow(xl); }
+.mix-shadow-demo-2xl { @include mix.shadow(2xl); }
+.mix-shadow-demo-inner { @include mix.shadow(inner); }
+
+// hover-light() 믹스인
+// 한글 설명: currentColor 기준으로 hover 시 배경색을 밝게 만듭니다.
+.mix-hover-light-demo {
+  @include mix.button-reset;
+  @include mix.hover-light(8%);
+  color: vars.$white;
+  background: vars.$primary;
+  padding: vars.$space-sm vars.$space-md;
+  border-radius: vars.$radius-sm;
+}
+
+// transition() 믹스인
+// 한글 설명: 특정 속성(transform) 전환 시간을 지정합니다.
+.mix-transition-demo {
+  @include mix.transition(transform);
+  padding: vars.$space-sm;
+  border: 1px solid vars.$border-color;
+  @include mix.rounded(vars.$radius-sm);
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+// smooth-transition() 믹스인
+// 한글 설명: 모든 속성에 부드러운 전환 효과를 적용합니다.
+.mix-smooth-transition-demo {
+  @include mix.smooth-transition;
+  padding: vars.$space-sm;
+  border: 1px solid vars.$border-color;
+  background: vars.$gray-50;
+  @include mix.rounded(vars.$radius-sm);
+
+  &:hover {
+    background: vars.$gray-200;
+    transform: translateY(-2px);
+  }
+}
+
+// rounded() 믹스인
+// 한글 설명: 라운드 값을 통일된 토큰으로 적용합니다.
+.mix-rounded-demo {
+  padding: vars.$space-sm;
+  border: 1px solid vars.$border-color;
+  @include mix.rounded(vars.$radius-xl);
+  background: vars.$gray-50;
+}
+
+// =====================================================
+// accessibility mixins 예시
+// =====================================================
+
+// sr-only() 믹스인
+// 한글 설명: 시각적으로 숨기고 스크린 리더에는 읽히게 처리합니다.
+.mix-sr-only-demo {
+  @include mix.sr-only;
+}
+
+// not-sr-only() 믹스인
+// 한글 설명: sr-only 상태를 해제하여 화면에 다시 표시합니다.
+.mix-not-sr-only-demo {
+  @include mix.not-sr-only;
+  margin: 0;
+  padding: vars.$space-xs vars.$space-sm;
+  display: inline-block;
+  background: vars.$gray-100;
+  @include mix.rounded(vars.$radius-xs);
+}
+
+// =====================================================
+// browser compatibility mixins 예시
+// =====================================================
+
+// appearance() 믹스인
+// 한글 설명: 브라우저 기본 UI 외형을 제거합니다.
+.mix-appearance-demo {
+  @include mix.appearance;
+  width: 100%;
+  padding: vars.$space-sm;
+  border: 1px solid vars.$border-color;
+  background: vars.$white;
+  @include mix.rounded(vars.$radius-sm);
+}
+
+// user-select() 믹스인
+// 한글 설명: 텍스트 선택을 막아 드래그 선택을 비활성화합니다.
+.mix-user-select-demo {
+  @include mix.user-select(none);
+  margin: 0;
+  padding: vars.$space-sm;
+  background: vars.$gray-100;
+  @include mix.rounded(vars.$radius-sm);
+}
+
+// pointer-events() 믹스인
+// 한글 설명: 포인터 이벤트를 막아 클릭/호버를 비활성화합니다.
+.mix-pointer-events-demo {
+  @include mix.pointer-events(none);
+  padding: vars.$space-sm vars.$space-md;
+  border: 1px solid vars.$border-color;
+  background: vars.$gray-200;
+  color: vars.$gray-600;
+  @include mix.rounded(vars.$radius-sm);
+}
+
+// =====================================================
+// utility mixins 예시
+// =====================================================
+
+// aspect-ratio() 믹스인
+// 한글 설명: 16:9 비율 컨테이너를 만들어 내부 요소를 꽉 채웁니다.
+.mix-aspect-ratio-demo {
+  @include mix.aspect-ratio(16, 9);
+  border: 1px solid vars.$border-color;
+  border-radius: vars.$radius-sm;
+  overflow: hidden;
+}
+
+.mix-aspect-ratio-content {
+  @include mix.flex-center;
+  background: linear-gradient(135deg, vars.$primary 0%, vars.$accent 100%);
+  color: vars.$white;
+  font-weight: vars.$font-weight-semibold;
+}
+
+// hide-visually() 믹스인
+// 한글 설명: 요소를 화면에서 완전히 숨깁니다(display: none).
+.mix-hide-visually-demo {
+  @include mix.hide-visually;
+}

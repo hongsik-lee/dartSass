@@ -1,0 +1,45 @@
+@use '../base' as base;
+@use '../base/variables' as vars;
+@use '../base/mixins' as mix;
+
+html, body {
+    font-family: base.$font-family-base;
+    font-size: base.rem(16px);
+    font-weight: 400;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    width: 100%;
+    color: base.$text;
+    word-break: keep-all;
+    word-wrap: break-word;
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 메인 컨텐츠 영역 */
+main {
+    padding: base.$space-2xl base.$space-lg;
+
+    @include mix.media(sm) {
+        padding: base.$space-lg base.$space-md;
+    }
+}
+
+/* 컨테이너 — 최대 너비 + 가운데 정렬 */
+.container {
+    @include mix.container;
+}
+
+/* 히어로 섹션 상하 패딩 */
+.hero {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: base.$space-lg;
+    padding-right: base.$space-lg;
+
+    @include mix.media(sm) {
+        padding-left: base.$space-md;
+        padding-right: base.$space-md;
+    }
+}

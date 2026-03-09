@@ -1,0 +1,47 @@
+/* 카드 컴포넌트 스타일 (샘플) */
+@use 'sass:color' as color;
+@use '../base' as base;
+@use '../base/mixins' as mix;
+
+@mixin card-base {
+  border: 1px solid color.adjust(base.$bg, $lightness: -10%);
+  padding: base.$space-md;
+  border-radius: base.$radius-sm;
+  background: base.$bg;
+  box-shadow: base.$shadow-sm;
+  @include mix.transition;
+
+  h2 {
+    margin-top: 0;
+    font-size: base.$font-size-lg;
+
+    @include mix.media(sm) {
+      font-size: base.$font-size-base;
+    }
+  }
+
+  .sub-title, p {
+    font-size: base.$font-size-base;
+    margin-top: base.$space-sm;
+
+    @include mix.media(sm) {
+      font-size: base.$font-size-sm;
+    }
+  }
+
+  li {
+    font-size: base.$font-size-sm;
+
+    @include mix.media(sm) {
+      font-size: base.$font-size-xs;
+    }
+  }
+
+  @include mix.media(sm) {
+    padding: base.$space-sm;
+  }
+}
+
+.card {
+  @include card-base;
+}

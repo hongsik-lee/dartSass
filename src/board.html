@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시판</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <h1 class="header-title">게시판</h1>
+    <a href="login.html" class="btn-login">로그인</a>
+  </header>
+
+  <main class="container">
+
+    <div class="card">
+      <h3 class="sub-title">공지사항</h3>
+      <ul class="board-list" id="boardList">
+      </ul>
+    </div>
+  </main> 
+  <script>
+    // 게시글 데이터가 담긴 '배열(Array)'입니다. 대괄호 [ ] 로 묶습니다.
+    // 배열 안에는 각 게시글의 정보가 담긴 '객체(Object)'가 중괄호 { } 로 묶여 있습니다.
+    // const boardData = [
+    //   {
+    //     num: 1,
+    //     title: "[중요] 서비스 점검 예정 안내",
+    //     date: "2026-03-10",
+    //     views: 1234
+    //   },
+    //   {
+    //     num: 2,
+    //     title: "새 기능 추가: 다크 모드 지원",
+    //     date: "2026-03-09",
+    //     views: 892
+    //   },
+    //   {
+    //     num: 3,
+    //     title: "Dart Sass 마이그레이션 완료",
+    //     date: "2026-03-08",
+    //     views: 654
+    //   }
+    // ];
+    const boardData = [
+      { num: 1, title: "[중요] 서비스 점검 예정 안내", date: "2026-03-10", views: 1234 },
+      { num: 2, title: "새 기능 추가: 다크 모드 지원", date: "2026-03-09", views: 892 },
+      { num: 3, title: "Dart Sass 마이그레이션 완료", date: "2026-03-08", views: 654 }
+    ];
+
+    const boardListElement = document.getElementById('boardList');
+    let listHTML = '';
+    boardData.forEach(function(item){
+      listHTML += `
+        <li class="board-item">
+          <div class="board-num">${item.num}</div>
+          <div class="board-content">
+            <p class="board-title"><a href="#">${item.title}</a></p>
+            <p class="board-meta">${item.data} · 조회 ${item.views}회</p>
+          </div>
+        </li> 
+      `
+    });
+
+    boardListElement.innerHTML = listHTML;
+    // 1. HTML을 넣을 빈 껍데기(ul)를 id로 찾아옵니다.
+    // const boardListElement = document.getElementById('boardList');
+
+    // 2. 생성된 HTML 코드를 담을 빈 문자를 만듭니다.
+    // let listHTML = '';
+
+    // 3. forEach 반복문을 사용해 데이터 개수만큼 HTML을 만들어냅니다.
+    // boardData.forEach(function(item) {
+      // 백틱( ` )을 사용해 기존 퍼블리싱 코드 구조를 그대로 가져옵니다.
+      // 데이터가 들어갈 자리에만 ${item.속성명} 을 넣어줍니다.
+      // listHTML += `
+      //   <li class="board-item">
+      //     <div class="board-num">${item.num}</div>
+      //     <div class="board-content">
+      //       <p class="board-title"><a href="#">${item.title}</a></p>
+      //       <p class="board-meta">${item.date} · 조회 ${item.views}회</p>
+      //     </div>
+      //   </li>
+      // `;
+    // });
+
+    // 4. 완성된 HTML 문자열을 실제 화면(ul 안쪽)에 꽂아 넣습니다.
+    // boardListElement.innerHTML = listHTML;
+  </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+/* 헤더 스타일  */
+@use '../base' as base;
+@use '../base/variables' as vars;
+@use '../base/mixins' as mix;
+
+/* 헤더 */
+.header {
+  @include mix.flex-between;
+  padding: base.$space-md base.$space-lg;
+  background: base.$white;
+  border-bottom: 1px solid base.$border-color;
+  @include mix.shadow(sm);
+
+  @include mix.media(md) {
+    padding: base.$space-md base.$space-md;
+  }
+
+  @include mix.media(sm) {
+    padding: base.$space-sm base.$space-md;
+  }
+}
+
+/* 헬더 타이틀 */
+.header-title {
+  @include mix.font(vars.$font-family-base, 24px, vars.$font-weight-bold, vars.$line-height-normal);
+  color: base.$primary;
+  margin: 0;
+  letter-spacing: -0.5px;
+
+  @include mix.media(md) {
+    font-size: 20px;
+  }
+
+  @include mix.media(sm) {
+    font-size: 16px;
+  }
+}
+
+/* 로그인 버튼 */
+.btn-login {
+  padding: base.$space-sm base.$space-md;
+  background: base.$primary;
+  color: base.$white;
+  border: none;
+  border-radius: base.$radius-sm;
+  @include mix.font(vars.$font-family-base, 14px, vars.$font-weight-semibold, vars.$line-height-normal);
+  text-decoration: none;
+  cursor: pointer;
+  @include mix.transition;
+
+  @include mix.media(md) {
+    padding: base.$space-xs base.$space-sm;
+    font-size: 12px;
+  }
+
+  @include mix.media(sm) {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  &:hover {
+    background: darken(base.$primary, 10%);
+    @include mix.shadow(md);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+

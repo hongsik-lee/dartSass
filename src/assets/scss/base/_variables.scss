@@ -1,0 +1,135 @@
+// ============================================
+// 디자인 토큰 — 사이트 전체 스타일 관리
+// ============================================
+
+// ========== 색상 (Colors) ==========
+$primary: #3498db !default;
+$secondary: #2ecc71 !default;
+$accent: #e74c3c !default;
+$success: #27ae60 !default;
+$warning: #f39c12 !default;
+$danger: #e74c3c !default;
+$info: #3498db !default;
+
+// 그레이스케일
+$white: #ffffff !default;
+$gray-50: #f9fafb !default;
+$gray-100: #f3f4f6 !default;
+$gray-200: #e5e7eb !default;
+$gray-300: #d1d5db !default;
+$gray-400: #9ca3af !default;
+$gray-500: #6b7280 !default;
+$gray-600: #4b5563 !default;
+$gray-700: #374151 !default;
+$gray-800: #1f2937 !default;
+$gray-900: #111827 !default;
+$black: #000000 !default;
+
+// 시멘틱 색상
+$bg: $white !default;
+$bg-light: $gray-50 !default;
+$text: $gray-900 !default;
+$text-secondary: $gray-600 !default;
+$text-muted: $gray-500 !default;
+$border-color: $gray-200 !default;
+$divider: $gray-100 !default;
+
+// ========== 타이포그래피 (Typography) ==========
+$font-family-base: 'Spoqa Han Sans Neo', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-mono: 'Fira Code', 'Courier New', monospace !default;
+$font-family-heading: $font-family-base !default;
+
+// 폰트 사이즈 (기본 16px = 1rem)
+$font-size-xs: 12px !default;   // 0.75rem
+$font-size-sm: 14px !default;   // 0.875rem
+$font-size-base: 16px !default; // 1rem
+$font-size-lg: 18px !default;   // 1.125rem
+$font-size-xl: 20px !default;   // 1.25rem
+$font-size-2xl: 24px !default;  // 1.5rem
+$font-size-3xl: 28px !default;  // 1.75rem
+$font-size-4xl: 32px !default;  // 2rem
+$font-size-5xl: 36px !default;  // 2.25rem
+$font-size-6xl: 48px !default;  // 3rem
+
+// 줄 높이
+$line-height-tight: 1.2 !default;
+$line-height-normal: 1.5 !default;
+$line-height-relaxed: 1.75 !default;
+$line-height-loose: 2 !default;
+
+// 폰트 굵기
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+$font-weight-extrabold: 800 !default;
+
+// ========== 스페이싱 (Spacing) ==========
+$space-xs: 4px !default;   // 0.25rem
+$space-sm: 8px !default;   // 0.5rem
+$space-md: 16px !default;  // 1rem
+$space-lg: 24px !default;  // 1.5rem
+$space-xl: 32px !default;  // 2rem
+$space-2xl: 48px !default; // 3rem
+$space-3xl: 64px !default; // 4rem
+
+// ========== 레이아웃 (Layout) ==========
+$max-width-container: 1200px !default;
+$max-width-sm: 640px !default;
+$max-width-md: 768px !default;
+$max-width-lg: 1024px !default;
+$max-width-xl: 1280px !default;
+$max-width-2xl: 1536px !default;
+
+// 기본 패딩
+$container-padding-x: $space-md !default;
+$container-padding-y: $space-md !default;
+
+// ========== 반응형 브레이크포인트 (Breakpoints) ==========
+// Mobile-first 접근
+$breakpoint-xs: 320px !default;  // 모바일
+$breakpoint-sm: 576px !default;  // 태블릿 세로
+$breakpoint-md: 768px !default;  // 태블릿
+$breakpoint-lg: 992px !default;  // 데스크톱
+$breakpoint-xl: 1200px !default; // 큰 데스크톱
+$breakpoint-2xl: 1400px !default; // 초대형
+
+// ========== 라디우스 (Border Radius) ==========
+$radius-none: 0 !default;
+$radius-xs: 2px !default;
+$radius-sm: 4px !default;
+$radius-md: 6px !default;
+$radius-lg: 8px !default;
+$radius-xl: 12px !default;
+$radius-2xl: 16px !default;
+$radius-full: 9999px !default;
+
+// ========== 그림자 (Shadows) ==========
+$shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !default;
+$shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !default;
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !default;
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !default;
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !default;
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !default;
+$shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06) !default;
+
+// ========== 트랜지션 (Transitions) ==========
+$transition-fast: 150ms ease-in-out !default;
+$transition-base: 250ms ease-in-out !default;
+$transition-slow: 350ms ease-in-out !default;
+
+// ========== Z-Index 스케일 ==========
+$z-dropdown: 1000 !default;
+$z-sticky: 1020 !default;
+$z-fixed: 1030 !default;
+$z-modal-backdrop: 1040 !default;
+$z-modal: 1050 !default;
+$z-popover: 1060 !default;
+$z-tooltip: 1070 !default;
+$z-notification: 1080 !default;
+
+// ========== 기본값 (Defaults) ==========
+$base-font-size: $font-size-base !default;
+$base-line-height: $line-height-normal !default;
+$base-font-weight: $font-weight-normal !default;
