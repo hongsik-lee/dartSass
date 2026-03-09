@@ -44,4 +44,5 @@
 
 .card {
   @include card-base;
+  margin-top: base.$space-sm
 }

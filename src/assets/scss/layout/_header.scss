@@ -42,6 +42,13 @@
   }
 }
 
+/* 헤더 우측 액션 그룹 */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: base.$space-sm;
+}
+
 /* 로그인 버튼 */
 .btn-login {
   padding: base.$space-sm base.$space-md;

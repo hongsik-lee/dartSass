@@ -9,15 +9,25 @@ function renderCommonHeader() {
   headerSlots.forEach(function (slot) {
     const rightHref = slot.dataset.rightHref || '';
     const rightLabel = slot.dataset.rightLabel || '';
+    const rightHref2 = slot.dataset.rightHref2 || '';
+    const rightLabel2 = slot.dataset.rightLabel2 || '';
 
-    const rightAction = rightHref && rightLabel
-      ? '<a href="' + escapeHtml(rightHref) + '" class="btn-login">' + escapeHtml(rightLabel) + '</a>'
+    const action1 = rightHref && rightLabel
+      ? `<a href="${escapeHtml(rightHref)}" class="btn-login">${escapeHtml(rightLabel)}</a>` : '';
+
+    const action2 = rightHref2 && rightLabel2
+      ? `<a href="${escapeHtml(rightHref2)}" class="btn-login">${escapeHtml(rightLabel2)}</a>` : '';
+
+    const rightActions = action1 + action2;
+
+    const actionGroup = rightActions
+      ? '<div class="header-actions">' + rightActions + '</div>'
       : '';
 
     slot.outerHTML =
       '<header class="header">' +
       '<h2 class="header-title"><a href="index.html">Dart Sass Project</a></h2>' +
-      rightAction +
+      actionGroup +
       '</header>';
   });
 }
