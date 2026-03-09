@@ -1,5 +1,5 @@
-// Sass 가이드 카드 뒤집기
-// 한글 설명: 각 예시 카드를 클릭하면 뒷면에서 해당 Sass 문법을 볼 수 있게 만듭니다.
+// Sass 가이드 카드 코드 패널
+// 한글 설명: 모든 카드에 Sass 문법과 복사 버튼을 항상 표시합니다.
 document.addEventListener('DOMContentLoaded', function () {
   const guidePage = document.querySelector('.sass-guide-page');
   if (!guidePage) return;
@@ -47,7 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const cards = guidePage.querySelectorAll('.sass-example-card');
 
-  cards.forEach(function (card, index) {
+  cards.forEach(function (card) {
+    if (card.dataset.enhanced === 'true') return;
+
     const titleEl = card.querySelector('h3');
     if (!titleEl) return;
 
@@ -60,60 +62,84 @@ document.addEventListener('DOMContentLoaded', function () {
     if (existingCodeEl) existingCodeEl.remove();
 
     const oldNodes = Array.from(card.childNodes);
-
-    const inner = document.createElement('div');
-    inner.className = 'sass-example-card-inner';
-
-    const frontFace = document.createElement('div');
-    frontFace.className = 'sass-example-face sass-example-face--front';
+    const front = document.createElement('div');
+    front.className = 'sass-card-front';
 
     oldNodes.forEach(function (node) {
-      frontFace.appendChild(node);
+      front.appendChild(node);
     });
 
-    const frontHint = document.createElement('p');
-    frontHint.className = 'sass-flip-hint';
-    frontHint.textContent = '카드를 클릭하면 Sass 문법을 볼 수 있습니다.';
-    frontFace.appendChild(frontHint);
+    const hint = document.createElement('p');
+    hint.className = 'sass-card-hint';
+    hint.textContent = '';
+    front.appendChild(hint);
 
-    const backFace = document.createElement('div');
-    backFace.className = 'sass-example-face sass-example-face--back';
-    backFace.innerHTML =
-      '<p class="sass-flip-title">' + escapeHtml(title) + ' 문법</p>' +
-      '<pre class="sass-example-syntax"><code>' + escapeHtml(syntax) + '</code></pre>' +
-      '<p class="sass-flip-hint sass-flip-hint--back">다시 클릭하면 예시 화면으로 돌아갑니다.</p>';
-
-    inner.appendChild(frontFace);
-    inner.appendChild(backFace);
+    const panel = document.createElement('div');
+    panel.className = 'sass-code-panel';
+    panel.innerHTML =
+      '<div class="sass-code-head">' +
+      '<p class="sass-code-title">' + escapeHtml(title) + ' 문법</p>' +
+      '<button type="button" class="sass-copy-button">복사</button>' +
+      '</div>' +
+      '<pre class="sass-example-syntax"><code>' + escapeHtml(syntax) + '</code></pre>';
 
     card.innerHTML = '';
-    card.appendChild(inner);
+    card.appendChild(front);
+    card.appendChild(panel);
 
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-pressed', 'false');
-    card.setAttribute('aria-label', title + ' 카드 뒤집기');
-
-    card.addEventListener('click', function (event) {
-      if (event.target.closest('a, button, input, select, textarea, label')) {
-        return;
-      }
-      toggleCard(card);
-    });
-
-    card.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        toggleCard(card);
-      }
-    });
-
-    card.style.transitionDelay = (index % 6) * 0.01 + 's';
+    card.dataset.enhanced = 'true';
+    setupCopyButton(panel, syntax);
   });
 
-  function toggleCard(card) {
-    const isFlipped = card.classList.toggle('is-flipped');
-    card.setAttribute('aria-pressed', String(isFlipped));
+  function setupCopyButton(panel, syntax) {
+    const button = panel.querySelector('.sass-copy-button');
+    if (!button) return;
+
+    button.addEventListener('click', function () {
+      copyToClipboard(syntax).then(function () {
+        button.classList.add('is-copied');
+        button.textContent = '복사됨';
+
+        window.setTimeout(function () {
+          button.classList.remove('is-copied');
+          button.textContent = '복사';
+        }, 1200);
+      }).catch(function () {
+        button.textContent = '복사 실패';
+        window.setTimeout(function () {
+          button.textContent = '복사';
+        }, 1200);
+      });
+    });
+  }
+
+  function copyToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+
+    return new Promise(function (resolve, reject) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'absolute';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      try {
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textarea);
+        if (successful) {
+          resolve();
+        } else {
+          reject(new Error('copy failed'));
+        }
+      } catch (error) {
+        document.body.removeChild(textarea);
+        reject(error);
+      }
+    });
   }
 
   function escapeHtml(text) {

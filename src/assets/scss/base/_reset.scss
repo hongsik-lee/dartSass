@@ -25,6 +25,7 @@ time, mark, audio, video{
     font-family: inherit;
 	// vertical-align:baseline;
 	background: transparent;
+  box-sizing: border-box;
 }
 main, header, footer, section, article, aside, nav, hgroup, details, menu, figure, figcaption{display:block;}
 div{box-sizing: border-box}

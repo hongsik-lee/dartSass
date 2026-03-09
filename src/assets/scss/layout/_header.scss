@@ -2,6 +2,7 @@
 @use '../base' as base;
 @use '../base/variables' as vars;
 @use '../base/mixins' as mix;
+@use 'sass:color' as color;
 
 /* 헤더 */
 .header {
@@ -26,6 +27,11 @@
   color: base.$primary;
   margin: 0;
   letter-spacing: -0.5px;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
   @include mix.media(md) {
     font-size: 20px;
@@ -59,7 +65,7 @@
   }
 
   &:hover {
-    background: darken(base.$primary, 10%);
+    background: color.adjust(base.$primary, $lightness: -10%);
     @include mix.shadow(md);
   }
 

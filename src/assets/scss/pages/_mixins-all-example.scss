@@ -15,6 +15,10 @@
 
   color: vars.$text;
   padding-bottom: vars.$space-3xl;
+
+  @include mix.media-down(vars.$breakpoint-sm) {
+    padding-bottom: vars.$space-xl;
+  }
 }
 
 // 소개 영역
@@ -36,6 +40,14 @@
     margin: 0 0 vars.$space-md;
     color: vars.$text-secondary;
   }
+
+  @include mix.media-down(vars.$breakpoint-sm) {
+    padding: vars.$space-md;
+
+    h1 {
+      font-size: vars.$font-size-2xl;
+    }
+  }
 }
 
 // 공통 섹션 블록
@@ -48,81 +60,120 @@
     @include mix.heading(vars.$font-size-2xl, vars.$font-weight-semibold);
     color: vars.$primary;
   }
+
+  @include mix.media-down(vars.$breakpoint-sm) {
+    margin-bottom: vars.$space-lg;
+
+    h2 {
+      font-size: vars.$font-size-xl;
+    }
+  }
 }
 
 // 카드 그리드
 // 한글 설명: grid-auto 믹스인으로 반응형 카드 배치를 만듭니다.
 .sass-guide-grid {
-  @include mix.grid-auto(260px, vars.$space-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: vars.$space-md;
+  align-items: start;
+
+  > * {
+    min-width: 0;
+  }
+
+  @include mix.media-down(vars.$breakpoint-sm) {
+    gap: vars.$space-sm;
+  }
 }
 
 // 공통 예시 카드
 // 한글 설명: 각각의 함수/믹스인 샘플을 담는 카드입니다.
 .sass-example-card {
-  cursor: pointer;
-  perspective: 1200px;
-  min-height: 210px;
-
-  h3 {
-    margin: 0 0 vars.$space-sm;
-    @include mix.heading(vars.$font-size-lg, vars.$font-weight-semibold);
-  }
-}
-
-// 카드 내부 3D 회전 컨테이너
-// 한글 설명: 카드 앞/뒷면을 같은 위치에 겹치고, rotateY로 뒤집습니다.
-.sass-example-card-inner {
-  display: grid;
-  transform-style: preserve-3d;
-  transition: transform vars.$transition-base;
-}
-
-// 카드가 뒤집힌 상태
-// 한글 설명: 카드에 is-flipped 클래스가 붙으면 180도 회전합니다.
-.sass-example-card.is-flipped .sass-example-card-inner {
-  transform: rotateY(180deg);
-}
-
-// 앞/뒷면 공통
-// 한글 설명: 양면 공통 박스 스타일입니다.
-.sass-example-face {
-  grid-area: 1 / 1;
+  position: relative;
+  min-width: 0;
+  min-height: 220px;
   padding: vars.$space-md;
   border: 1px solid vars.$border-color;
   background: vars.$white;
   @include mix.rounded(vars.$radius-md);
   @include mix.shadow(xs);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+
+  h3 {
+    margin: 0 0 vars.$space-sm;
+    @include mix.heading(vars.$font-size-lg, vars.$font-weight-semibold);
+  }
+
+  @include mix.media-down(vars.$breakpoint-sm) {
+    min-height: 0;
+    padding: vars.$space-sm;
+  }
 }
 
-// 카드 뒷면
-// 한글 설명: Sass 문법 코드를 표시하는 뒷면입니다.
-.sass-example-face--back {
-  transform: rotateY(180deg);
+// 카드 앞면 컨텐츠 래퍼
+// 한글 설명: 기존 데모 콘텐츠를 안정적으로 배치합니다.
+.sass-card-front {
   display: flex;
   flex-direction: column;
   gap: vars.$space-sm;
+  min-width: 0;
 }
 
-// 뒤집기 안내 문구
-// 한글 설명: 카드 클릭으로 앞/뒷면 전환을 안내합니다.
-.sass-flip-hint {
-  margin: vars.$space-sm 0 0;
-  font-size: vars.$font-size-xs;
-  color: vars.$text-muted;
+// 코드 패널
+// 한글 설명: 모든 카드에서 항상 보이는 Sass 문법 패널입니다.
+.sass-code-panel {
+  margin-top: vars.$space-sm;
+  padding-top: vars.$space-sm;
+  border-top: 1px dashed vars.$border-color;
+  min-width: 0;
 }
 
-.sass-flip-hint--back {
-  margin-top: auto;
+// 코드 헤더
+// 한글 설명: 문법 제목과 복사 버튼을 한 줄에 배치합니다.
+.sass-code-head {
+  @include mix.flex-between;
+  gap: vars.$space-sm;
+  margin-bottom: vars.$space-xs;
+
+  @include mix.media-down(vars.$breakpoint-sm) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
-// 뒷면 제목
-// 한글 설명: 현재 카드의 Sass 문법 제목입니다.
-.sass-flip-title {
+// 코드 패널 제목
+// 한글 설명: 열렸을 때 표시되는 문법 제목입니다.
+.sass-code-title {
   margin: 0;
   font-weight: vars.$font-weight-semibold;
   color: vars.$primary;
+}
+
+// 복사 버튼
+// 한글 설명: 코드 복사 기능 버튼 스타일입니다.
+.sass-copy-button {
+  @include mix.button-reset;
+  padding: vars.$space-xs vars.$space-sm;
+  border: 1px solid vars.$border-color;
+  background: vars.$white;
+  color: vars.$text-secondary;
+  @include mix.rounded(vars.$radius-sm);
+  @include mix.transition(all);
+  font-size: vars.$font-size-xs;
+  font-weight: vars.$font-weight-medium;
+
+  &:hover {
+    border-color: vars.$primary;
+    color: vars.$primary;
+    background: func.rgba-color(vars.$primary, 0.06);
+  }
+
+  &.is-copied {
+    border-color: vars.$secondary;
+    color: vars.$secondary;
+    background: func.rgba-color(vars.$secondary, 0.08);
+  }
 }
 
 // Sass 문법 코드 영역
@@ -138,6 +189,10 @@
   line-height: vars.$line-height-normal;
   color: vars.$text;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 // 설명/코드 텍스트 공통
@@ -152,6 +207,7 @@
   font-family: vars.$font-family-mono;
   font-size: vars.$font-size-xs;
   color: vars.$text-muted;
+  overflow-wrap: anywhere;
 }
 
 // 점프 링크
@@ -235,7 +291,9 @@
 // fluid() 함수
 // 한글 설명: clamp를 사용해 너비를 유동적으로 변경합니다.
 .func-fluid-box {
-  width: func.fluid(160px, 35vw, 360px);
+  width: 100%;
+  max-width: func.fluid(160px, 35vw, 360px);
+  box-sizing: border-box;
   padding: vars.$space-sm;
   background: vars.$gray-100;
   border: 1px solid vars.$border-color;
@@ -257,6 +315,8 @@
 // 한글 설명: 최대 너비와 좌우 패딩, 가운데 정렬을 적용합니다.
 .mix-container-demo {
   @include mix.container(680px);
+  max-width: 100%;
+  box-sizing: border-box;
   padding-top: vars.$space-sm;
   padding-bottom: vars.$space-sm;
   border: 1px dashed vars.$gray-400;
@@ -339,6 +399,9 @@
 // media(), media-down() 믹스인
 // 한글 설명: 화면 크기에 따라 배경/폰트 크기가 바뀌는 반응형 예시입니다.
 .mix-media-demo {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   padding: vars.$space-md;
   background: vars.$gray-100;
   border: 1px solid vars.$border-color;
@@ -350,6 +413,7 @@
 
   @include mix.media-down(vars.$breakpoint-sm) {
     font-size: vars.$font-size-sm;
+    padding: vars.$space-sm;
   }
 }
 
@@ -385,6 +449,8 @@
 // 한글 설명: 한 줄을 넘어가는 텍스트를 ... 으로 줄입니다.
 .mix-truncate-demo {
   @include mix.truncate;
+  display: block;
+  width: 100%;
   max-width: 100%;
 }
 

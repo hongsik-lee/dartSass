@@ -4,6 +4,7 @@
 @use '../base/mixins' as mix;
 @use '../components/button' as compbtn;
 @use '../components/card' as compcard;
+@use 'sass:color' as color;
 
 /* 로그인 래퍼 — 중앙 정렬 */
 .login-wrapper {
@@ -138,7 +139,7 @@
   @include mix.transition;
 
   &:hover {
-    background: darken(base.$primary, 10%);
+    background: color.adjust(base.$primary, $lightness: -10%);
     @include mix.shadow(md);
   }
 
@@ -165,7 +166,7 @@
 
   &:hover {
     text-decoration: underline;
-    color: darken(base.$primary, 10%);
+    color: color.adjust(base.$primary, $lightness: -10%);
   }
 }
 

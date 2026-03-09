@@ -168,6 +168,7 @@ function openFeatureModal(featureId) {
 // 모달 닫기
 function closeFeatureModal() {
   const modal = document.getElementById('featureModal');
+  if (!modal) return;
   modal.classList.remove('active');
   document.body.style.overflow = 'auto';
 }
