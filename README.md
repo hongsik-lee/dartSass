@@ -47,19 +47,8 @@ npm run gulp
 
 실행 후 BrowserSync가 `dist/`를 기준으로 로컬 서버를 띄웁니다.
 
-## 자주 쓰는 개별 명령
-
-```bash
-npx gulp clean
-npx gulp styles
-npx gulp scripts
-npx gulp html
-npx gulp assets
-```
-
-필요할 때 개별 태스크만 실행해 빠르게 확인할 수 있습니다.
 
 ## 참고
 
-- 현재 `package.json`에는 `dev` 스크립트가 없으므로 `npm run dev` 대신 `npm run gulp`를 사용하세요.
+- 실행 명령어 : npm run gulp
 - `node_modules/`, `dist/`는 `.gitignore`에 포함되어 커밋에서 제외됩니다.
